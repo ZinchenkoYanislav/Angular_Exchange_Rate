@@ -1,0 +1,50 @@
+<p>
+  <mat-toolbar color="primary">
+    <span class="margin">Exchange Rate</span>
+    <span *ngFor="let rate of rates">
+      <span class="margin" *ngIf="rate.cc == 'USD'">
+        {{ rate.cc }} = {{ rate.rate }}
+      </span>
+      <span *ngIf="rate.cc == 'EUR'"> {{ rate.cc }} = {{ rate.rate }}</span>
+    </span>
+  </mat-toolbar>
+</p>
+
+<form novalidate [formGroup]="exchangeForm">
+  <div>
+    <select formControlName="rate1" class="input" (change)="OnChange1()" >
+      <ng-container *ngFor="let rate of rates">
+        <option *ngIf="rate.cc == 'EUR'" value="{{ rate.rate }}">
+          {{ rate.cc }}
+        </option>
+        <option *ngIf="rate.cc == 'USD'" value="{{ rate.rate }}">
+          {{ rate.cc }}
+        </option>
+      </ng-container>
+      <option value="1">UAH</option>
+    </select>
+    <input
+      (input)="OnChange1()"
+      class="input"
+      type="text"
+      formControlName="value1"/>
+  </div>
+  <div>
+    <select formControlName="rate2" class="input" (change)="OnChange2()">
+      <ng-container *ngFor="let rate of rates">
+        <option *ngIf="rate.cc == 'EUR'" value="{{ rate.rate }}">
+          {{ rate.cc }}
+        </option>
+        <option *ngIf="rate.cc == 'USD'" value="{{ rate.rate }}">
+          {{ rate.cc }}
+        </option>
+      </ng-container>
+      <option value="1">UAH</option>
+    </select>
+    <input
+      (input)="OnChange2()"
+      class="input"
+      type="text"
+      formControlName="value2"/>
+  </div>
+</form>
